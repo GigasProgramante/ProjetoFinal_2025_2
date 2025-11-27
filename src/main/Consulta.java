@@ -24,4 +24,22 @@ public class Consulta {
     public Paciente getPaciente() {
         return paciente;
     }
+    public LocalDate getDataConsulta() {
+        return dataConsulta;
+    }
+    public LocalTime getHoraConsulta() {
+        return horaConsulta;
+    }
+
+    @Override
+    public String toString() {
+        return "Consulta{" +
+                "Idconsulta=" + Idconsulta +
+                ", medico=" + medico +
+                ", paciente=" + paciente +
+                ", dataConsulta=" + dataConsulta +
+                ", horaConsulta=" + horaConsulta +
+                '}';
+    }
 }
+
