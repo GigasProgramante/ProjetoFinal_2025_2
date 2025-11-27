@@ -1,0 +1,5 @@
+package main;
+
+public enum Cargos {
+    RECEPCIONISTA, GERENTE, ZELADOR, AULIAR_ADMINISTRATIVO, CONTADOR
+}
