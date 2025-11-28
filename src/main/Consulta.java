@@ -23,6 +23,18 @@ public class Consulta {
         this.horaConsulta = horaConsulta;
         this.sintomas = sintomas;
     }
+    public void agendarConsulta(Medico medico, Paciente paciente, LocalDate dataConsulta, LocalTime horaConsulta, ArrayList<String> sintomas){
+        this.medico = medico;
+        this.paciente = paciente;
+        this.dataConsulta = dataConsulta;
+    }
+    public void remarcarConsulta(LocalDate novaData, LocalTime novaHora){
+        this.dataConsulta = dataConsulta;
+        this.horaConsulta = horaConsulta;
+    }
+    public void cancelarConsulta(int idConsulta){
+        this.statusConsulta = StatusConsulta.CANCELADA;
+    }
 
     public Medico getMedico() {
         return medico;
