@@ -17,7 +17,9 @@ public class main {
             System.out.println("[3] - Cadastrar novo funcionário");
             System.out.println("[4] - Marcar uma consulta");
             System.out.println("[5] - Consultar pacientes");
-            System.out.println("[6] - Sair");
+            System.out.println("[6] - Consultar médicos");
+            System.out.println("[7] - Consultar funcionários");
+            System.out.println("[8] - Sair");
 
             int opcao = sc.nextInt();
             sc.nextLine();
@@ -41,7 +43,7 @@ public class main {
                 System.out.print("Data de nascimento: ");
                 String dataNascimento = sc.nextLine();
                 String[] partes = dataNascimento.split("/");
-                Paciente paciente = new Paciente(nome, cpf, telefone, email, endereco, partes[0] + "/" + partes[1] + "/" + partes[2]);
+                Paciente paciente = new Paciente(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf);
                 System.out.println("Paciente cadastrado com sucesso!");
                 System.out.println(paciente);
                 pacientes.add(paciente);
@@ -65,18 +67,43 @@ public class main {
                 String dataNascimento = sc.nextLine();
                 String[] partes = dataNascimento.split("/");
 
-                int crm = gerador.nextInt(100000, 120000);
-            } else if (opcao == 3) {
+                System.out.println("Salário: ");
+                double salario = sc.nextDouble();
 
+                int crm = gerador.nextInt(100000, 120000);
+                String crmString = (crm + "/SC");
+
+                System.out.println("Especialidade: ");
+                System.out.println("[1] - GINECOLOGISTA\n[2] - CARDIOLOGISTA\n[3] - DERMATOLOGISTA\n[4] - ORTOPEDISTA\n" +
+                        "[5] - PSIQUIATRA\n[6] - OFTALMOLOGISTA\n[7] - GASTROENTEROLOGISTA\n[8] - PEDIATRA");
+                int especialidade = sc.nextInt();
+                sc.nextLine();
+                Especialidade esp = switch (especialidade) {
+                    case 1 -> Especialidade.GINECOLOGISTA;
+                    case 2 -> Especialidade.CARDIOLOGISTA;
+                    case 3 -> Especialidade.DERMATOLOGISTA;
+                    case 4 -> Especialidade.ORTOPEDISTA;
+                    case 5 -> Especialidade.PSIQUIATRA;
+                    case 6 -> Especialidade.OFTALMOLOGISTA;
+                    case 7 -> Especialidade.GASTROENTEROLOGISTA;
+                    case 8 -> Especialidade.PEDIATRA;
+                    default -> throw new IllegalArgumentException("Opção inválida para especialidade: " + especialidade);
+                };
+                Medico medico = new Medico(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf, esp, crmString, salario);
+                medicos.add(medico);
+            } else if (opcao == 3) {
             } else if (opcao == 4) {
+            } else if (opcao == 5) {
                 for (Paciente paciente : pacientes) {
                     System.out.println(paciente);
                 }
-            } else if (opcao == 5) {
-
             } else if (opcao == 6) {
+                for (Medico medico : medicos) {
+                    System.out.println(medico);
+                }
+            } else if (opcao == 7) {
+            } else if (opcao == 8) {
                 break;
-
             }
         }
     }
