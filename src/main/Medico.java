@@ -13,6 +13,10 @@ public class Medico extends Pessoa {
         this.salario = salario;
     }
 
+    public void criarConsulta() {
+
+    }
+
     @Override
     public String toString() {
         return super.toString() + "Medico{" +

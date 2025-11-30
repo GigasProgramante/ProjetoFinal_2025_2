@@ -15,7 +15,7 @@ public class Consulta {
 
 
     public Consulta(int idconsulta, StatusConsulta statusConsulta, Medico medico, Paciente paciente, LocalDate dataConsulta, LocalTime horaConsulta, ArrayList<String> sintomas) {
-        Idconsulta = idconsulta;
+        this.Idconsulta = idconsulta;
         this.statusConsulta = statusConsulta;
         this.medico = medico;
         this.paciente = paciente;
@@ -23,14 +23,10 @@ public class Consulta {
         this.horaConsulta = horaConsulta;
         this.sintomas = sintomas;
     }
-    public void agendarConsulta(Medico medico, Paciente paciente, LocalDate dataConsulta, LocalTime horaConsulta, ArrayList<String> sintomas){
-        this.medico = medico;
-        this.paciente = paciente;
-        this.dataConsulta = dataConsulta;
-    }
+
     public void remarcarConsulta(LocalDate novaData, LocalTime novaHora){
-        this.dataConsulta = dataConsulta;
-        this.horaConsulta = horaConsulta;
+        this.dataConsulta = novaData;
+        this.horaConsulta = novaHora;
     }
     public void cancelarConsulta(int idConsulta){
         this.statusConsulta = StatusConsulta.CANCELADA;
@@ -55,12 +51,12 @@ public class Consulta {
     @Override
     public String toString() {
         return "Consulta{" +
-                "Idconsulta=" + Idconsulta +
-                ", medico=" + medico +
-                ", paciente=" + paciente +
-                ", dataConsulta=" + dataConsulta +
-                ", horaConsulta=" + horaConsulta +
-                '}';
+                "Idconsulta=" + this.Idconsulta +
+                ", medico=" + this.medico +
+                ", paciente=" + this.paciente +
+                ", dataConsulta=" + this.dataConsulta +
+                ", horaConsulta=" + this.horaConsulta +
+                ", status da consulta=" + this.statusConsulta;
     }
 }
 
