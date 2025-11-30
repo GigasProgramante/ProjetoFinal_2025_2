@@ -1,15 +1,13 @@
 package main;
 
 public class Paciente extends Pessoa{
-    private int anoNascimento;
 
-    public Paciente(String nome, String cpf, String telefone, String email, String endereco, int anoNascimento) {
-        super(nome, cpf, telefone, email, endereco);
-        this.anoNascimento = anoNascimento;
+    public Paciente(String nome, String dataNascimento, String endereco, String email, String telefone, String cpf) {
+        super(nome, dataNascimento, endereco, email, telefone, cpf);
     }
 
     @Override
-    public void imprimirDados() {
-        
+    public String toString() {
+        return super.toString();
     }
 }

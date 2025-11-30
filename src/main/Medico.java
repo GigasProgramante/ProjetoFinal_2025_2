@@ -5,15 +5,21 @@ public class Medico extends Pessoa {
     private String crm;
     private double salario;
 
-    public Medico(String nome, String cpf, String telefone, String email, String endereco, Especialidade especialidade, String crm, double salario) {
-        super(nome, cpf, telefone, email, endereco);
+    public Medico(String nome, String dataNascimento, String endereco, String email, String telefone, String cpf,
+                  Especialidade especialidade, String crm, double salario) {
+        super(nome, dataNascimento, endereco, email, telefone, cpf);
         this.especialidade = especialidade;
         this.crm = crm;
         this.salario = salario;
     }
 
     @Override
-    public void imprimirDados() {
-
+    public String toString() {
+        return super.toString() + "Medico{" +
+                "especialidade=" + especialidade +
+                ", crm='" + crm + '\'' +
+                ", salario=" + salario +
+                '}';
     }
 }
+
