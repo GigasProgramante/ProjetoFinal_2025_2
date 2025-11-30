@@ -23,7 +23,6 @@ public class Consulta {
         this.horaConsulta = horaConsulta;
         this.sintomas = sintomas;
     }
-
     public void remarcarConsulta(LocalDate novaData, LocalTime novaHora){
         this.dataConsulta = novaData;
         this.horaConsulta = novaHora;
