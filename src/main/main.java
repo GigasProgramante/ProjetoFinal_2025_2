@@ -8,6 +8,7 @@ public class main {
     public static void main(String[] args) {
         ArrayList<Paciente> pacientes = new ArrayList<>();
         ArrayList<Medico> medicos = new ArrayList<>();
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         Random gerador = new Random();
         System.out.println("Bem vindo ao sistema de gerenciamento de consultas");
@@ -87,12 +88,52 @@ public class main {
                     case 6 -> Especialidade.OFTALMOLOGISTA;
                     case 7 -> Especialidade.GASTROENTEROLOGISTA;
                     case 8 -> Especialidade.PEDIATRA;
-                    default -> throw new IllegalArgumentException("Opção inválida para especialidade: " + especialidade);
+                    default ->
+                            throw new IllegalArgumentException("Opção inválida para especialidade: " + especialidade);
                 };
                 Medico medico = new Medico(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf, esp, crmString, salario);
                 medicos.add(medico);
             } else if (opcao == 3) {
+                System.out.print("Nome: ");
+                String nome = sc.nextLine();
+
+                System.out.print("CPF: ");
+                String cpf = sc.nextLine();
+
+                System.out.print("Telefone: ");
+                String telefone = sc.nextLine();
+
+                System.out.print("Email: ");
+                String email = sc.nextLine();
+
+                System.out.print("Endereço (Ex: Rua Alberto Pereira, 124): ");
+                String endereco = sc.nextLine();
+
+                System.out.print("Data de nascimento: ");
+                String dataNascimento = sc.nextLine();
+                String[] partes = dataNascimento.split("/");
+
+                System.out.println("Salario: ");
+                double salario = sc.nextDouble();
+
+                System.out.println("[1] - Recepsionista\n[2] - Gerente\n[3] - ZELADOR\n[4] - Auxiliar Administrativo\n[5] - Contador");
+                int cargo = sc.nextInt();
+                Cargos car = switch (cargo) {
+                    case 1 -> Cargos.RECEPCIONISTA;
+                    case 2 -> Cargos.GERENTE;
+                    case 3 -> Cargos.ZELADOR;
+                    case 4 -> Cargos.AULIAR_ADMINISTRATIVO;
+                    case 5 -> Cargos.CONTADOR;
+                    default -> throw new IllegalStateException("Unexpected value: " + cargo);
+                };
+                Funcionario funcionario = new Funcionario(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf, car, salario);
+                funcionarios.add(funcionario);
             } else if (opcao == 4) {
+                int idConsulta = gerador.nextInt(100000);
+                System.out.println("Qual seu nome");
+                String nome = sc.nextLine();
+
+
             } else if (opcao == 5) {
                 for (Paciente paciente : pacientes) {
                     System.out.println(paciente);
@@ -102,6 +143,9 @@ public class main {
                     System.out.println(medico);
                 }
             } else if (opcao == 7) {
+                for (Funcionario funcionario : funcionarios) {
+                    System.out.println(funcionario);
+                }
             } else if (opcao == 8) {
                 break;
             }

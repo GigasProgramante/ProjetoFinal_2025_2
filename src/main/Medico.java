@@ -14,7 +14,6 @@ public class Medico extends Pessoa {
     }
 
     public void criarConsulta() {
-
     }
 
     @Override
