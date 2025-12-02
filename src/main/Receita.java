@@ -11,17 +11,26 @@ public class Receita {
 
     public Receita(int idReceita, ArrayList<String> medicamentos, LocalDate dataEmissao, Medico medico) {
         this.idReceita = idReceita;
-        this.medicamentos = medicamentos;
+        this.medicamentos = (medicamentos != null) ? medicamentos : new ArrayList<>();
         this.dataEmissao = dataEmissao;
         this.medico = medico;
     }
-    public void adicionarMedicamento(String medicamento){
+
+    public void adicionarMedicamento(String medicamento) {
         this.medicamentos.add(medicamento);
     }
-    public void removerMedicamento(String medicamento){
+
+    public void removerMedicamento(String medicamento) {
         this.medicamentos.remove(medicamento);
     }
+
     public void exibirDetalhes() {
-        System.out.println();
+        System.out.println("ID da Receita: " + idReceita);
+        System.out.println("Data de Emissão: " + dataEmissao);
+        System.out.println("Médico Emissor: " + (medico != null ? medico.exibirInfo() : "Não especificado"));
+        System.out.println("Medicamentos:");
+        for (String med : medicamentos) {
+            System.out.println("- " + med);
+        }
     }
 }
