@@ -12,11 +12,6 @@ public class Medico extends Pessoa {
         this.crm = crm;
         this.salario = salario;
     }
-
-    public void criarConsulta() {
-
-    }
-
     @Override
     public String exibirInfo() {
         return super.exibirInfo() + "~~~~~~~~~~~ Médico:" +
