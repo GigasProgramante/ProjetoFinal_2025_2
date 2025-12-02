@@ -7,7 +7,7 @@ public class Paciente extends Pessoa{
     }
 
     @Override
-    public String toString() {
-        return super.toString();
+    public String exibirInfo() {
+        return super.exibirInfo();
     }
 }

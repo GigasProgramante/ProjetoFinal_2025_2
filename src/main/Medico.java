@@ -14,15 +14,15 @@ public class Medico extends Pessoa {
     }
 
     public void criarConsulta() {
+
     }
 
     @Override
-    public String toString() {
-        return super.toString() + "Medico{" +
-                "especialidade=" + especialidade +
-                ", crm='" + crm + '\'' +
-                ", salario=" + salario +
-                '}';
+    public String exibirInfo() {
+        return super.exibirInfo() + "~~~~~~~~~~~ Médico:" +
+                " | Especialidade= " + especialidade +
+                " | CRM= " + crm +
+                " | Salário= " + salario + "\n";
     }
 }
 

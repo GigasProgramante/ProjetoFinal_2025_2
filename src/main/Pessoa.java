@@ -16,15 +16,13 @@ public abstract class Pessoa {
         this.telefone = telefone;
         this.cpf = cpf;
     }
-    @Override
-    public String toString() {
-        return "Pessoa{" +
-                "nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", email='" + email + '\'' +
-                ", endereco='" + endereco + '\'' +
-                ", dataNascimento='" + dataNascimento + '\'' +
-                '}';
+    public String exibirInfo() {
+        return "Informaçoes Pessoais:" +
+                " | Nome= " + nome +
+                " | CPF= " + cpf +
+                " | Telefone= " + telefone +
+                " | E-mail= " + email +
+                " | Endereço= " + endereco +
+                " | Data de nascimento= " + dataNascimento + "\n";
     }
 }

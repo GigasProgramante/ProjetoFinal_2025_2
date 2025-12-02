@@ -93,6 +93,7 @@ public class main {
                 };
                 Medico medico = new Medico(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf, esp, crmString, salario);
                 medicos.add(medico);
+                System.out.println("Médico cadastrado com sucesso!");
             } else if (opcao == 3) {
                 System.out.print("Nome: ");
                 String nome = sc.nextLine();
@@ -116,7 +117,7 @@ public class main {
                 System.out.println("Salario: ");
                 double salario = sc.nextDouble();
 
-                System.out.println("[1] - Recepsionista\n[2] - Gerente\n[3] - ZELADOR\n[4] - Auxiliar Administrativo\n[5] - Contador");
+                System.out.println("[1] - Recepsionista\n[2] - Gerente\n[3] - Zelador\n[4] - Auxiliar Administrativo\n[5] - Contador");
                 int cargo = sc.nextInt();
                 Cargos car = switch (cargo) {
                     case 1 -> Cargos.RECEPCIONISTA;
@@ -135,16 +136,19 @@ public class main {
 
 
             } else if (opcao == 5) {
-                for (Paciente paciente : pacientes) {
-                    System.out.println(paciente);
+                System.out.println("Lista de pacientes:\n------------------------------");
+                for (Paciente p : pacientes) {
+                    System.out.println(p.exibirInfo() + "------------------------------");
                 }
             } else if (opcao == 6) {
-                for (Medico medico : medicos) {
-                    System.out.println(medico);
+                System.out.println("Lista de médicos:\n------------------------------");
+                for (Medico m : medicos) {
+                    System.out.println(m.exibirInfo() + "------------------------------");
                 }
             } else if (opcao == 7) {
-                for (Funcionario funcionario : funcionarios) {
-                    System.out.println(funcionario);
+                System.out.println("Lista de funcionários:\n------------------------------");
+                for (Funcionario f : funcionarios) {
+                    System.out.println(f.exibirInfo() + "------------------------------");
                 }
             } else if (opcao == 8) {
                 break;
