@@ -11,7 +11,7 @@ public class Receita {
 
     public Receita(int idReceita, ArrayList<String> medicamentos, LocalDate dataEmissao, Medico medico) {
         this.idReceita = idReceita;
-        this.medicamentos = (medicamentos != null) ? medicamentos : new ArrayList<>();
+        this.medicamentos = medicamentos;
         this.dataEmissao = dataEmissao;
         this.medico = medico;
     }
