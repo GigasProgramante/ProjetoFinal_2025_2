@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class main {
+
     public static void main(String[] args) {
         ArrayList<Paciente> pacientes = new ArrayList<>();
         ArrayList<Medico> medicos = new ArrayList<>();
@@ -13,122 +14,17 @@ public class main {
         Random gerador = new Random();
         System.out.println("Bem vindo ao sistema de gerenciamento de consultas");
         while (true) {
-            System.out.println("[1] - Cadastrar novo paciente");
-            System.out.println("[2] - Cadastrar novo médico");
-            System.out.println("[3] - Cadastrar novo funcionário");
-            System.out.println("[4] - Marcar uma consulta");
-            System.out.println("[5] - Consultar pacientes");
-            System.out.println("[6] - Consultar médicos");
-            System.out.println("[7] - Consultar funcionários");
-            System.out.println("[8] - Sair");
+            exibirMenu();
 
             int opcao = sc.nextInt();
             sc.nextLine();
 
             if (opcao == 1) {
-                System.out.print("Nome: ");
-                String nome = sc.nextLine();
-
-                System.out.print("CPF: ");
-                String cpf = sc.nextLine();
-
-                System.out.print("Telefone: ");
-                String telefone = sc.nextLine();
-
-                System.out.print("Email: ");
-                String email = sc.nextLine();
-
-                System.out.print("Endereço (Ex: Rua Alberto Pereira, 124): ");
-                String endereco = sc.nextLine();
-
-                System.out.print("Data de nascimento: ");
-                String dataNascimento = sc.nextLine();
-                String[] partes = dataNascimento.split("/");
-                Paciente paciente = new Paciente(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf);
-                System.out.println("Paciente cadastrado com sucesso!");
-                System.out.println(paciente);
-                pacientes.add(paciente);
+                pacientes.add(cadastrarPaciente());
             } else if (opcao == 2) {
-                System.out.print("Nome: ");
-                String nome = sc.nextLine();
-
-                System.out.println("CPF: ");
-                String cpf = sc.nextLine();
-
-                System.out.println("Telefone: ");
-                String telefone = sc.nextLine();
-
-                System.out.println("Email: ");
-                String email = sc.nextLine();
-
-                System.out.println("Endereço (Ex: Rua Alberto Pereira, 124):");
-                String endereco = sc.nextLine();
-
-                System.out.println("Data de nascimento: ");
-                String dataNascimento = sc.nextLine();
-                String[] partes = dataNascimento.split("/");
-
-                System.out.println("Salário: ");
-                double salario = sc.nextDouble();
-
-                int crm = gerador.nextInt(100000, 120000);
-                String crmString = (crm + "/SC");
-
-                System.out.println("Especialidade: ");
-                System.out.println("[1] - GINECOLOGISTA\n[2] - CARDIOLOGISTA\n[3] - DERMATOLOGISTA\n[4] - ORTOPEDISTA\n" +
-                        "[5] - PSIQUIATRA\n[6] - OFTALMOLOGISTA\n[7] - GASTROENTEROLOGISTA\n[8] - PEDIATRA");
-                int especialidade = sc.nextInt();
-                sc.nextLine();
-                Especialidade esp = switch (especialidade) {
-                    case 1 -> Especialidade.GINECOLOGISTA;
-                    case 2 -> Especialidade.CARDIOLOGISTA;
-                    case 3 -> Especialidade.DERMATOLOGISTA;
-                    case 4 -> Especialidade.ORTOPEDISTA;
-                    case 5 -> Especialidade.PSIQUIATRA;
-                    case 6 -> Especialidade.OFTALMOLOGISTA;
-                    case 7 -> Especialidade.GASTROENTEROLOGISTA;
-                    case 8 -> Especialidade.PEDIATRA;
-                    default ->
-                            throw new IllegalArgumentException("Opção inválida para especialidade: " + especialidade);
-                };
-                Medico medico = new Medico(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf, esp, crmString, salario);
-                medicos.add(medico);
-                System.out.println("Médico cadastrado com sucesso!");
+                medicos.add(cadastrarMedico());
             } else if (opcao == 3) {
-                System.out.print("Nome: ");
-                String nome = sc.nextLine();
-
-                System.out.print("CPF: ");
-                String cpf = sc.nextLine();
-
-                System.out.print("Telefone: ");
-                String telefone = sc.nextLine();
-
-                System.out.print("Email: ");
-                String email = sc.nextLine();
-
-                System.out.print("Endereço (Ex: Rua Alberto Pereira, 124): ");
-                String endereco = sc.nextLine();
-
-                System.out.print("Data de nascimento: ");
-                String dataNascimento = sc.nextLine();
-                String[] partes = dataNascimento.split("/");
-
-                System.out.println("Salario: ");
-                double salario = sc.nextDouble();
-
-                System.out.println("[1] - Recepsionista\n[2] - Gerente\n[3] - Zelador\n[4] - Auxiliar Administrativo\n[5] - Contador");
-                int cargo = sc.nextInt();
-                Cargos car = switch (cargo) {
-                    case 1 -> Cargos.RECEPCIONISTA;
-                    case 2 -> Cargos.GERENTE;
-                    case 3 -> Cargos.ZELADOR;
-                    case 4 -> Cargos.AULIAR_ADMINISTRATIVO;
-                    case 5 -> Cargos.CONTADOR;
-                    default -> throw new IllegalStateException("Unexpected value: " + cargo);
-                };
-                Funcionario funcionario = new Funcionario(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf, car, salario);
-                funcionarios.add(funcionario);
+                funcionarios.add(cadastrarFuncinario());
             } else if (opcao == 4) {
                 int idConsulta = gerador.nextInt(100000);
                 System.out.println("Qual seu nome");
@@ -154,5 +50,138 @@ public class main {
                 break;
             }
         }
+    }
+
+    public static void exibirMenu() {
+        System.out.println("[1] - Cadastrar novo paciente");
+        System.out.println("[2] - Cadastrar novo médico");
+        System.out.println("[3] - Cadastrar novo funcionário");
+        System.out.println("[4] - Marcar uma consulta");
+        System.out.println("[5] - Consultar pacientes");
+        System.out.println("[6] - Consultar médicos");
+        System.out.println("[7] - Consultar funcionários");
+        System.out.println("[8] - Sair");
+    }
+
+    public static Paciente cadastrarPaciente() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+
+        System.out.print("CPF: ");
+        String cpf = sc.nextLine();
+
+        System.out.print("Telefone: ");
+        String telefone = sc.nextLine();
+
+        System.out.print("Email: ");
+        String email = sc.nextLine();
+
+        System.out.print("Endereço (Ex: Rua Alberto Pereira, 124): ");
+        String endereco = sc.nextLine();
+
+        System.out.print("Data de nascimento: ");
+        String dataNascimento = sc.nextLine();
+
+        sc.close();
+
+        String[] partes = dataNascimento.split("/");
+        System.out.println("Paciente cadastrado com sucesso!");
+        return new Paciente(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf);
+    }
+
+    public static Medico cadastrarMedico() {
+        Scanner sc = new Scanner(System.in);
+        Random gerador = new Random();
+
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+
+        System.out.println("CPF: ");
+        String cpf = sc.nextLine();
+
+        System.out.println("Telefone: ");
+        String telefone = sc.nextLine();
+
+        System.out.println("Email: ");
+        String email = sc.nextLine();
+
+        System.out.println("Endereço (Ex: Rua Alberto Pereira, 124):");
+        String endereco = sc.nextLine();
+
+        System.out.println("Data de nascimento: ");
+        String dataNascimento = sc.nextLine();
+        String[] partes = dataNascimento.split("/");
+
+        System.out.println("Salário: ");
+        double salario = sc.nextDouble();
+
+        int crm = gerador.nextInt(100000, 120000);
+        String crmString = (crm + "/SC");
+
+        System.out.println("Especialidade: ");
+        System.out.println("[1] - GINECOLOGISTA\n[2] - CARDIOLOGISTA\n[3] - DERMATOLOGISTA\n[4] - ORTOPEDISTA\n" +
+                "[5] - PSIQUIATRA\n[6] - OFTALMOLOGISTA\n[7] - GASTROENTEROLOGISTA\n[8] - PEDIATRA");
+        int especialidade = sc.nextInt();
+        sc.nextLine();
+        Especialidade esp = switch (especialidade) {
+            case 1 -> Especialidade.GINECOLOGISTA;
+            case 2 -> Especialidade.CARDIOLOGISTA;
+            case 3 -> Especialidade.DERMATOLOGISTA;
+            case 4 -> Especialidade.ORTOPEDISTA;
+            case 5 -> Especialidade.PSIQUIATRA;
+            case 6 -> Especialidade.OFTALMOLOGISTA;
+            case 7 -> Especialidade.GASTROENTEROLOGISTA;
+            case 8 -> Especialidade.PEDIATRA;
+            default ->
+                    throw new IllegalArgumentException("Opção inválida para especialidade: " + especialidade);
+        };
+
+        sc.close();
+        System.out.println("Médico cadastrado com sucesso!");
+
+        return new Medico(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf, esp, crmString, salario);
+    }
+
+    public static Funcionario cadastrarFuncinario() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+
+        System.out.print("CPF: ");
+        String cpf = sc.nextLine();
+
+        System.out.print("Telefone: ");
+        String telefone = sc.nextLine();
+
+        System.out.print("Email: ");
+        String email = sc.nextLine();
+
+        System.out.print("Endereço (Ex: Rua Alberto Pereira, 124): ");
+        String endereco = sc.nextLine();
+
+        System.out.print("Data de nascimento: ");
+        String dataNascimento = sc.nextLine();
+        String[] partes = dataNascimento.split("/");
+
+        System.out.println("Salario: ");
+        double salario = sc.nextDouble();
+
+        System.out.println("[1] - Recepsionista\n[2] - Gerente\n[3] - Zelador\n[4] - Auxiliar Administrativo\n[5] - Contador");
+        int cargo = sc.nextInt();
+        Cargos car = switch (cargo) {
+            case 1 -> Cargos.RECEPCIONISTA;
+            case 2 -> Cargos.GERENTE;
+            case 3 -> Cargos.ZELADOR;
+            case 4 -> Cargos.AULIAR_ADMINISTRATIVO;
+            case 5 -> Cargos.CONTADOR;
+            default -> throw new IllegalStateException("Unexpected value: " + cargo);
+        };
+
+        sc.close();
+        System.out.println("Funcionário cadastrado com sucesso!");
+
+        return new Funcionario(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf, car, salario);
     }
 }
