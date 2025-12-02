@@ -49,7 +49,24 @@ public class main {
                         System.out.println(f.exibirInfo() + "------------------------------");
                     }
                 }
-                case 8 ->{}
+                case 8 ->{
+                    if (pacientes.isEmpty() || medicos.isEmpty()) {
+                        System.out.println("Cadastre um paciente e um médico primeiro!");
+                    } else {
+                        System.out.println("Selecione o paceinte pelo indice (0 a " + (pacientes.size() - 1) + "):");
+                        int idxPaciente = sc.nextInt();
+                        sc.nextLine();
+                        Paciente pacienteSeleciondado = pacientes.get(idxPaciente);
+
+                        System.out.println("Selecionando o medico pelo indice (0 a " + (medicos.size() - 1) + "):");
+                        int idxMedico = sc.nextInt();
+                        sc.nextLine();
+                        Medico medicoSelecionado = medicos.get(idxMedico);
+
+                        if (pacienteSeleciondado.getProntuario() == null) {
+                            pacienteSeleciondado.criarProntuario(gerador.nextInt(100000), null, new ArrayList<>());
+                        }
+                }
             }
         }
     }
