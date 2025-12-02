@@ -15,15 +15,12 @@ public class Receita {
         this.dataEmissao = dataEmissao;
         this.medico = medico;
     }
-
     public void adicionarMedicamento(String medicamento) {
         this.medicamentos.add(medicamento);
     }
-
     public void removerMedicamento(String medicamento) {
         this.medicamentos.remove(medicamento);
     }
-
     public void exibirDetalhes() {
         System.out.println("ID da Receita: " + idReceita);
         System.out.println("Data de Emissão: " + dataEmissao);
