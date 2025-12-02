@@ -14,43 +14,44 @@ public class main {
         Random gerador = new Random();
         System.out.println("Bem vindo ao sistema de gerenciamento de consultas");
         while (true) {
+
+            // Executa um metodo que exibe o menu
             exibirMenu();
 
+            // O scanner coleta na main a opção escolhida pelo usuário
             int opcao = sc.nextInt();
-            sc.nextLine();
+            sc.nextLine(); // Aqui o scanner garante que não tem uma linha vazia, talvez não seja necessário, mas é sempre bom garantir
 
-            if (opcao == 1) {
-                pacientes.add(cadastrarPaciente(sc));
-            } else if (opcao == 2) {
-                medicos.add(cadastrarMedico(sc));
-            } else if (opcao == 3) {
-                funcionarios.add(cadastrarFuncionario(sc));
-            } else if (opcao == 4) {
-                int idConsulta = gerador.nextInt(100000);
-                System.out.println("Qual seu nome");
-                String nome = sc.nextLine();
-
-
-            } else if (opcao == 5) {
-                System.out.println("Lista de pacientes:\n------------------------------");
-                for (Paciente p : pacientes) {
-                    System.out.println(p.exibirInfo() + "------------------------------");
+            switch (opcao) {
+                case 1 -> pacientes.add(cadastrarPaciente(sc));
+                case 2 -> medicos.add(cadastrarMedico(sc));
+                case 3 -> funcionarios.add(cadastrarFuncionario(sc));
+                case 4 -> {
+                    int idConsulta = gerador.nextInt(100000);
+                    System.out.println("Qual seu nome");
+                    String nome = sc.nextLine();
                 }
-            } else if (opcao == 6) {
-                System.out.println("Lista de médicos:\n------------------------------");
-                for (Medico m : medicos) {
-                    System.out.println(m.exibirInfo() + "------------------------------");
+                case 5 -> {
+                    System.out.println("Lista de pacientes:\n------------------------------");
+                    for (Paciente p : pacientes) {
+                        System.out.println(p.exibirInfo() + "------------------------------");
+                    }
                 }
-            } else if (opcao == 7) {
-                System.out.println("Lista de funcionários:\n------------------------------");
-                for (Funcionario f : funcionarios) {
-                    System.out.println(f.exibirInfo() + "------------------------------");
+                case 6 -> {
+                    System.out.println("Lista de médicos:\n------------------------------");
+                    for (Medico m : medicos) {
+                        System.out.println(m.exibirInfo() + "------------------------------");
+                    }
                 }
-            } else if (opcao == 8) {
-                break;
+                case 7 -> {
+                    System.out.println("Lista de funcionários:\n------------------------------");
+                    for (Funcionario f : funcionarios) {
+                        System.out.println(f.exibirInfo() + "------------------------------");
+                    }
+                }
+                case 8 ->{}
             }
         }
-        sc.close();
     }
 
     public static void exibirMenu() {
