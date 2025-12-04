@@ -1,4 +1,4 @@
-// Receita.java
+
 package main;
 
 import java.time.LocalDate;
@@ -23,8 +23,6 @@ public class Receita {
                 " | Médico: " + medico.getNome() +
                 " | Medicamentos: " + medicamentos;
     }
-
-    // Assim System.out.println(receita) já mostra exibirInfo()
     @Override
     public String toString() {
         return exibirInfo();

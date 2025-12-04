@@ -9,7 +9,6 @@ public class Funcionario extends Pessoa {
         this.cargo = cargo;
         this.salario = salario;
     }
-
     @Override
     public String exibirInfo() {
         return super.exibirInfo() + "~~~~~~~~~~~ Funcionario " +

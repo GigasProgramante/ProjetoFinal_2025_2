@@ -21,10 +21,6 @@ public class Prontuario {
         this.tratamentos = new ArrayList<>();
     }
 
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
     // ===== CONSULTAS =====
     public void adicionarConsulta(Consulta consulta) {
         consultas.add(consulta);
@@ -41,8 +37,6 @@ public class Prontuario {
             System.out.println(c);
         }
     }
-
-
     public void adicionarReceita(Receita receita) {
         receitas.add(receita);
     }
