@@ -202,7 +202,29 @@ public class main {
                     medicos.add(mmmmmm);
                     medicos.add(mmmmm2);
                 }
+                case 12 -> {
+                    if (pacientes.isEmpty()) {
+                        System.out.println("Cadastre um paciente primeiro!");
+                        break;
+                    }
 
+                    System.out.print("Digite o nome do paciente: ");
+                    String nomePaciente = sc.nextLine();
+
+                    Paciente pacienteSelecionado = null;
+                    for (Paciente p : pacientes) {
+                        if (p.getNome().equalsIgnoreCase(nomePaciente)) {
+                            pacienteSelecionado = p;
+                            break;
+                        }
+                    }
+
+                    if (pacienteSelecionado == null) {
+                        System.out.println("Paciente não encontrado!");
+                    } else {
+                        pacienteSelecionado.getProntuario().exibirProntuarioCompleto();
+                    }
+                }
                 default -> System.out.println("Opção inválida!");
             }
 
@@ -224,6 +246,7 @@ public class main {
         System.out.println("[09] - Cadastrar Receita");
         System.out.println("[10] - Sair");
         System.out.println("[11] - Instanciar o Básico");
+        System.out.println("[12] - Exibir Prontuario");
     }
 
     /**

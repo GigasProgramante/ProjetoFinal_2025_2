@@ -27,9 +27,5 @@ public class Medico extends Pessoa {
                 " | CRM= " + crm +
                 " | Salário= " + salario + "\n";
     }
-
-    public Medico getMedico() {
-        return this;
-    }
 }
 

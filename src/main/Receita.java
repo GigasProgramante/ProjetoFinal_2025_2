@@ -17,10 +17,5 @@ public class Receita {
         this.dataEmissao = dataEmissao;
         this.medico = medico;
     }
-    public String exibirInfo() {
-        return "Receita #" + idReceita +
-                " | Data: " + dataEmissao +
-                " | Médico: " + medico.getNome() +
-                " | Medicamentos: " + medicamentos;
-    }
 }
+

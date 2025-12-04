@@ -5,19 +5,34 @@ import java.util.ArrayList;
 
 public class Tratamento {
 
-    private String nomeTratamento;
-    private int duracao;
+    private String nome;
+    private int duracao;          // em dias
     private String descricao;
-    private ArrayList<Prontuario> prontuarios;
+    private Prontuario prontuario; // onde será associado
 
-    public Tratamento(String nomeTratamento, int duracao, String descricao) {
-        this.nomeTratamento = nomeTratamento;
+    public Tratamento(String nome, int duracao, String descricao) {
+        this.nome = nome;
         this.duracao = duracao;
         this.descricao = descricao;
-        this.prontuarios = new ArrayList<>();
     }
 
-    public void associarProntuario(Prontuario prontuario){
-        this.prontuarios.add(prontuario);
+    // associa este tratamento a um prontuário
+    public void associarProntuario(Prontuario prontuario) {
+        this.prontuario = prontuario;
+        prontuario.adicionarTratamento(this);
+    }
+
+    // getters usados em listarTratamentos()
+    public String getNome() {
+        return nome;
+    }
+
+    public int getDuracao() {
+        return duracao;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 }
+

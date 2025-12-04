@@ -3,52 +3,92 @@ package main;
 import java.util.ArrayList;
 import java.util.Random;
 
+import java.util.ArrayList;
+
+import java.util.ArrayList;
+
 public class Prontuario {
 
-    private int numero;
-    private ArrayList<Consulta> consultas = new ArrayList<>();
-
     private Paciente paciente;
-    private ArrayList<Receita> receitas = new ArrayList<>();
+    private ArrayList<Consulta> consultas;
+    private ArrayList<Receita> receitas;
+    private ArrayList<Tratamento> tratamentos;
 
     public Prontuario(Paciente paciente) {
-        Random rd = new Random();
-        this.numero = rd.nextInt(100000);
         this.paciente = paciente;
+        this.consultas = new ArrayList<>();
         this.receitas = new ArrayList<>();
+        this.tratamentos = new ArrayList<>();
     }
 
-    public int getNumero() {
-        return numero;
+    public Paciente getPaciente() {
+        return paciente;
     }
 
-    public void adicionarReceita(Receita receita) {
-        this.receitas.add(receita);
-    }
-
-    public void removerReceita(Receita receita) {
-        this.receitas.remove(receita);
-    }
-
+    // ===== CONSULTAS =====
     public void adicionarConsulta(Consulta consulta) {
-        this.consultas.add(consulta);
-    }
-
-    public ArrayList<Receita> getReceitas() {
-        return receitas;
+        consultas.add(consulta);
     }
 
     public void listarConsultas() {
-        System.out.println("Consultas do prontuário #" + numero + ":");
+        if (consultas.isEmpty()) {
+            System.out.println("Nenhuma consulta registrada.");
+            return;
+        }
+        System.out.println("Consultas do paciente " + paciente.getNome() + ":");
         for (Consulta c : consultas) {
-            System.out.println(c.exibirInfo());
+            System.out.println("----------------------------");
+            System.out.println(c);
         }
     }
 
+
+    public void adicionarReceita(Receita receita) {
+        receitas.add(receita);
+    }
+
     public void listarReceitas() {
-        System.out.println("Receitas do prontuário #" + numero + ":");
-        for (Receita r : receitas) {
-            System.out.println(r.exibirInfo());
+        if (receitas.isEmpty()) {
+            System.out.println("Nenhuma receita registrada.");
+            return;
         }
+        System.out.println("Receitas do paciente " + paciente.getNome() + ":");
+        for (Receita r : receitas) {
+            System.out.println("----------------------------");
+            System.out.println(r); // ou r.exibirInfo()
+        }
+    }
+
+
+    public void adicionarTratamento(Tratamento tratamento) {
+        tratamentos.add(tratamento);
+    }
+
+    public void listarTratamentos() {
+        if (tratamentos.isEmpty()) {
+            System.out.println("Nenhum tratamento cadastrado para este paciente.");
+            return;
+        }
+        System.out.println("Tratamentos do paciente " + paciente.getNome() + ":");
+        for (Tratamento t : tratamentos) {
+            System.out.println("----------------------------");
+            System.out.println("Nome: " + t.getNome());
+            System.out.println("Duração (dias): " + t.getDuracao());
+            System.out.println("Descrição: " + t.getDescricao());
+        }
+    }
+
+    // ===== EXIBIR TUDO =====
+    public void exibirProntuarioCompleto() {
+        System.out.println("=== PRONTUÁRIO DO PACIENTE: " + paciente.getNome() + " ===");
+
+        System.out.println("\n--- Consultas ---");
+        listarConsultas();
+
+        System.out.println("\n--- Receitas ---");
+        listarReceitas();
+
+        System.out.println("\n--- Tratamentos ---");
+        listarTratamentos();
     }
 }

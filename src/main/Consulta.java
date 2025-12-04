@@ -24,56 +24,7 @@ public class Consulta {
         this.statusConsulta = StatusConsulta.AGENDADA;
     }
 
-
-
-    public Medico getMedico () {
-        return this.medico;
-    }
-    public Paciente getPaciente () {
-        return this.paciente;
-    }
-    public LocalDate getDataConsulta () {
-        return this.dataConsulta;
-    }
-    public LocalTime getHoraConsulta () {
-        return this.horaConsulta;
-    }
-    public ArrayList<String> getSintomas () {
-        return this.sintomas;
-    }
-     public int getIdconsulta () {
-        return Idconsulta;
-    }
-    public void setMedico (Medico medico){
+    public void setMedico(Medico medico) {
         this.medico = medico;
-    }
-
-    public String exibirDetalhes () {
-        return "Consulta" +
-                " | Idconsulta= " + this.Idconsulta +
-                " | medico= " + this.medico +
-                " | paciente= " + this.paciente +
-                " | dataConsulta= " + this.dataConsulta +
-                " | horaConsulta= " + this.horaConsulta +
-                " | statusConsulta da consulta= " + this.statusConsulta;
-    }
-
-    public String getNomeMedicoDigitado () {
-        return nomeMedicoDigitado;
-    }
-
-    public StatusConsulta getStatusConsulta() {
-        return statusConsulta;
-    }
-
-    public void setStatusConsulta(StatusConsulta statusConsulta){
-        this.statusConsulta = statusConsulta;
-    }
-
-    public String exibirInfo () {
-        return "Consulta de " + paciente.getNome() +
-                " em " + dataConsulta + " às " + horaConsulta +
-                " | Médico: " + (medico != null ? medico.getNome() : nomeMedicoDigitado) +
-                " | Status: " + statusConsulta;
     }
 }

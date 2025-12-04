@@ -17,15 +17,9 @@ public class Paciente extends Pessoa {
     public void criarProntuario() {
         this.prontuario = new Prontuario(this); // Liga ao Paciente
     }
-
     public Prontuario getProntuario() {
         return prontuario;
     }
-
-    public void deletarProntuario() {
-        this.prontuario = null;
-    }
-
     @Override
     public String exibirInfo() {
         return super.exibirInfo();
