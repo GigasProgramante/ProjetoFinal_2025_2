@@ -413,7 +413,7 @@ public class main {
      * @param pacientes lista de pacientes a exibir.
      */
     private static void listarPacientes(ArrayList<Paciente> pacientes) {
-        int i=0;
+        int i = 0;
         System.out.println("Lista de pacientes:\n[1]---------------------------");
         for (Paciente p : pacientes) {
             System.out.println(p.exibirInfo());
@@ -431,7 +431,7 @@ public class main {
      * @param medicos lista de médicos a exibir.
      */
     private static void listarMedicos(ArrayList<Medico> medicos) {
-        int i=0;
+        int i = 0;
         System.out.println("Lista de médicos:\n[1]---------------------------");
         for (Medico m : medicos) {
             System.out.println(m.exibirInfo());
@@ -449,7 +449,7 @@ public class main {
      * @param funcionarios lista de funcionários a exibir.
      */
     private static void listarFuncionarios(ArrayList<Funcionario> funcionarios) {
-        int i=0;
+        int i = 0;
         System.out.println("Lista de funcionários:\n[0]---------------------------");
         for (Funcionario f : funcionarios) {
             System.out.println(f.exibirInfo());

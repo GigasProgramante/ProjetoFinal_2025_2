@@ -1,4 +1,3 @@
-
 package main;
 
 import java.time.LocalDate;
@@ -28,4 +27,3 @@ public class Receita {
         return exibirInfo();
     }
 }
-

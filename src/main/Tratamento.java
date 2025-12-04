@@ -1,7 +1,4 @@
-// Tratamento.java
 package main;
-
-import java.util.ArrayList;
 
 public class Tratamento {
 
@@ -26,11 +23,9 @@ public class Tratamento {
     public String getNome() {
         return nome;
     }
-
     public int getDuracao() {
         return duracao;
     }
-
     public String getDescricao() {
         return descricao;
     }
