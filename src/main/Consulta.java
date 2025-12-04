@@ -3,6 +3,7 @@ package main;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Consulta {
     private final int Idconsulta;
@@ -14,10 +15,10 @@ public class Consulta {
     private ArrayList<String> sintomas;
 
 
-    public Consulta(int idconsulta, StatusConsulta statusConsulta, Medico medico, Paciente paciente, LocalDate dataConsulta, LocalTime horaConsulta, ArrayList<String> sintomas) {
-        this.Idconsulta = idconsulta;
-        this.statusConsulta = statusConsulta;
-        this.medico = medico;
+    public Consulta(Paciente paciente, LocalDate dataConsulta, LocalTime horaConsulta, ArrayList<String> sintomas) {
+        Random rd = new Random(100000);
+        this.Idconsulta = rd.nextInt();
+        this.statusConsulta = StatusConsulta.AGENDADA;
         this.paciente = paciente;
         this.dataConsulta = dataConsulta;
         this.horaConsulta = horaConsulta;
@@ -32,19 +33,27 @@ public class Consulta {
     }
 
     public Medico getMedico() {
-        return medico;
+        return this.medico;
     }
     public Paciente getPaciente() {
-        return paciente;
+        return this.paciente;
     }
     public LocalDate getDataConsulta() {
-        return dataConsulta;
+        return this.dataConsulta;
     }
     public LocalTime getHoraConsulta() {
-        return horaConsulta;
+        return this.horaConsulta;
     }
     public ArrayList<String> getSintomas() {
-        return sintomas;
+        return this.sintomas;
+    }
+
+    public int getIdconsulta() {
+        return Idconsulta;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
     }
 
     public String exibirDetalhes() {

@@ -10,8 +10,7 @@ public class Medico extends Pessoa {
     private String crm;
     private double salario;
 
-    public Medico(String nome, String dataNascimento, String endereco, String email, String telefone, String cpf,
-                  Especialidade especialidade, String crm, double salario) {
+    public Medico(String nome, String dataNascimento, String endereco, String email, String telefone, String cpf, Especialidade especialidade, String crm, double salario) {
         super(nome, dataNascimento, endereco, email, telefone, cpf);
         this.especialidade = especialidade;
         this.crm = crm;
@@ -27,6 +26,10 @@ public class Medico extends Pessoa {
                 " | Especialidade= " + especialidade +
                 " | CRM= " + crm +
                 " | Salário= " + salario + "\n";
+    }
+
+    public Medico getMedico() {
+        return this;
     }
 }
 

@@ -25,4 +25,8 @@ public abstract class Pessoa {
                 " | Endereço= " + endereco +
                 " | Data de nascimento= " + dataNascimento + "\n";
     }
+
+    public String getNome() {
+        return nome;
+    }
 }

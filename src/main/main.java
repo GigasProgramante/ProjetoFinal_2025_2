@@ -27,28 +27,21 @@ public class main {
                 case 2 -> medicos.add(cadastrarMedico(sc));
                 case 3 -> funcionarios.add(cadastrarFuncionario(sc));
                 case 4 -> {
-                    int idConsulta = gerador.nextInt(100000);
-                    System.out.println("Qual seu nome");
+                    System.out.print("Insira o nome do paciente: ");
                     String nome = sc.nextLine();
-                }
-                case 5 -> {
-                    System.out.println("Lista de pacientes:\n------------------------------");
-                    for (Paciente p : pacientes) {
-                        System.out.println(p.exibirInfo() + "------------------------------");
+                    
+                    for(Paciente p:pacientes) {
+                        if(p.getNome() != nome) {
+                            System.out.println("Consulta marcada com sucesso!!!\nId da consulta: ");
+                            associarConsulta(p.marcarConsulta(),medicos);
+                        } else {
+                            System.out.println("Paciente não encontrado!!!");
+                        }
                     }
                 }
-                case 6 -> {
-                    System.out.println("Lista de médicos:\n------------------------------");
-                    for (Medico m : medicos) {
-                        System.out.println(m.exibirInfo() + "------------------------------");
-                    }
-                }
-                case 7 -> {
-                    System.out.println("Lista de funcionários:\n------------------------------");
-                    for (Funcionario f : funcionarios) {
-                        System.out.println(f.exibirInfo() + "------------------------------");
-                    }
-                }
+                case 5 -> listarPacientes(pacientes);
+                case 6 -> listarMedicos(medicos);
+                case 7 -> listarFuncionarios(funcionarios);
                 case 8 -> {
                     if (pacientes.isEmpty() || medicos.isEmpty()) {
                         System.out.println("Cadastre um paciente e um médico primeiro!");
@@ -71,14 +64,16 @@ public class main {
             }
         }
     }
+
+
     public static void exibirMenu() {
         System.out.println("[1] - Cadastrar novo paciente");
         System.out.println("[2] - Cadastrar novo médico");
         System.out.println("[3] - Cadastrar novo funcionário");
         System.out.println("[4] - Marcar uma consulta");
-        System.out.println("[5] - Consultar pacientes");
-        System.out.println("[6] - Consultar médicos");
-        System.out.println("[7] - Consultar funcionários");
+        System.out.println("[5] - Listar pacientes");
+        System.out.println("[6] - Listar médicos");
+        System.out.println("[7] - Listar funcionários");
         System.out.println("[8] - Sair");
     }
 
@@ -113,23 +108,23 @@ public class main {
         System.out.print("Nome: ");
         String nome = sc.nextLine();
 
-        System.out.println("CPF: ");
+        System.out.print("CPF: ");
         String cpf = sc.nextLine();
 
-        System.out.println("Telefone: ");
+        System.out.print("Telefone: ");
         String telefone = sc.nextLine();
 
-        System.out.println("Email: ");
+        System.out.print("Email: ");
         String email = sc.nextLine();
 
-        System.out.println("Endereço (Ex: Rua Alberto Pereira, 124):");
+        System.out.print("Endereço (Ex: Rua Alberto Pereira, 124):");
         String endereco = sc.nextLine();
 
-        System.out.println("Data de nascimento: ");
+        System.out.print("Data de nascimento: ");
         String dataNascimento = sc.nextLine();
         String[] partes = dataNascimento.split("/");
 
-        System.out.println("Salário: ");
+        System.out.print("Salário: ");
         double salario = sc.nextDouble();
 
         int crm = gerador.nextInt(100000, 120000);
@@ -177,7 +172,7 @@ public class main {
         String dataNascimento = sc.nextLine();
         String[] partes = dataNascimento.split("/");
 
-        System.out.println("Salario: ");
+        System.out.print("Salario: ");
         double salario = sc.nextDouble();
 
         System.out.println("[1] - Recepsionista\n[2] - Gerente\n[3] - Zelador\n[4] - Auxiliar Administrativo\n[5] - Contador");
@@ -194,5 +189,61 @@ public class main {
         System.out.println("Funcionário cadastrado com sucesso!");
 
         return new Funcionario(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf, car, salario);
+    }
+
+    private static void listarPacientes(ArrayList<Paciente> pacientes) {
+        int i=0;
+        System.out.println("Lista de pacientes:\n[0]---------------------------");
+        for (Paciente p : pacientes) {
+            System.out.println(p.exibirInfo());
+            i++;
+            if(i == pacientes.size()) {
+                break;
+            }
+            System.out.println("[" + i +"]---------------------------");
+        }
+    }
+
+    private static void listarMedicos(ArrayList<Medico> medicos) {
+        int i=0;
+        System.out.println("Lista de médicos:\n[0]---------------------------");
+        for (Medico m : medicos) {
+            System.out.println(m.exibirInfo());
+            i++;
+            if(i == medicos.size()) {
+                break;
+            }
+            System.out.println("[" + i +"]---------------------------");
+        }
+    }
+
+    private static void listarFuncionarios(ArrayList<Funcionario> funcionarios) {
+        int i=0;
+        System.out.println("Lista de funcionários:\n[0]---------------------------");
+        for (Funcionario f : funcionarios) {
+            System.out.println(f.exibirInfo());
+            i++;
+            if(i == funcionarios.size()) {
+                break;
+            }
+            System.out.println("[" + i +"]---------------------------");
+        }
+    }
+
+    public static void associarConsulta(Consulta consulta, ArrayList<Medico> medicos) {
+        Medico medico = medicos.get(0);
+        Scanner sc3 = new Scanner(System.in);
+        System.out.print("Informe o nome do médico com qual será a consulta: ");
+        String nomeMedico = sc3.nextLine();
+        sc3.close();
+        
+        for(Medico m:medicos) {
+            if(m.getNome() == nomeMedico) {
+                medico = m;
+                break;
+            }
+        }
+        
+        consulta.setMedico(medico);
     }
 }

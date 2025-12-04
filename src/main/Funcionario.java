@@ -12,8 +12,8 @@ public class Funcionario extends Pessoa {
 
     @Override
     public String exibirInfo() {
-        return super.exibirInfo() + "Funcionario{" +
-                "cargo=" + cargo +
-                '}';
+        return super.exibirInfo() + "~~~~~~~~~~~ Funcionario " +
+                " | cargo=" + cargo +
+                '\n';
     }
 }
