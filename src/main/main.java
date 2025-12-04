@@ -4,35 +4,58 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Sistema de gerenciamento de consultas em linha de comando.
+ * Este programa permite cadastrar pacientes, médicos e funcionários,
+ * além de marcar consultas, criar tratamentos e registrar receitas,
+ * exibindo um menu iterativo para o usuário.
+ */
 public class main {
+
+    /**
+     * Scanner compartilhado para entrada de dados do usuário via console.
+     */
     private static Scanner sc = new Scanner(System.in);
+
+    /**
+     * Gerador de números aleatórios utilizado, por exemplo, para criar IDs.
+     */
     private static Random gerador = new Random();
 
+    /**
+     * Ponto de entrada do sistema.
+     * Exibe um menu contínuo permitindo a execução das operações disponíveis.
+     *
+     * @param args argumentos de linha de comando (não utilizados).
+     */
     public static void main(String[] args) {
         ArrayList<Paciente> pacientes = new ArrayList<>();
         ArrayList<Medico> medicos = new ArrayList<>();
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
 
-
         System.out.println("Bem vindo ao sistema de gerenciamento de consultas");
 
+        // Loop principal do menu
         while (true) {
 
-            // Executa um metodo que exibe o menu
+            // Exibe as opções
             exibirMenu();
 
-            // O scanner coleta na main a opção escolhida pelo usuário
+            // Lê a opção escolhida pelo usuário
             int opcao = sc.nextInt();
-            sc.nextLine(); // Aqui o scanner garante que não tem uma linha vazia, talvez não seja necessário, mas é sempre bom garantir
+            sc.nextLine(); // Consome quebra de linha pendente
 
             switch (opcao) {
                 case 1 -> pacientes.add(cadastrarPaciente(sc));
                 case 2 -> medicos.add(cadastrarMedico(sc));
                 case 3 -> funcionarios.add(cadastrarFuncionario(sc));
+
+                // Marcar uma consulta
                 case 4 -> {
                     System.out.print("Insira o nome do paciente: ");
                     String nomePaciente = sc.nextLine();
 
+                    // Busca paciente pelo nome (case-insensitive)
                     Paciente pacienteSelecionado = null;
                     for (Paciente p : pacientes) {
                         if (p.getNome().equalsIgnoreCase(nomePaciente)) {
@@ -54,6 +77,7 @@ public class main {
                     System.out.print("Informe o nome do médico com qual será a consulta: ");
                     String nomeMedico = sc.nextLine();
 
+                    // Busca médico pelo nome (case-insensitive)
                     Medico medicoSelecionado = null;
                     for (Medico m : medicos) {
                         if (m.getNome().equalsIgnoreCase(nomeMedico)) {
@@ -67,14 +91,16 @@ public class main {
                         break;
                     }
 
-                    // AQUI É A CHAMADA NOVA:
+                    // Realiza o agendamento de consulta para o paciente com o médico selecionado
                     Consulta consulta = pacienteSelecionado.marcarConsulta(medicoSelecionado, sc);
                 }
+
+                // Listagens
                 case 5 -> listarPacientes(pacientes);
                 case 6 -> listarMedicos(medicos);
                 case 7 -> listarFuncionarios(funcionarios);
 
-                // 8: Tratamento
+                // Cadastrar Tratamento
                 case 8 -> {
                     if (pacientes.isEmpty()) {
                         System.out.println("Cadastre um paciente primeiro!");
@@ -91,7 +117,7 @@ public class main {
                     }
                 }
 
-                // 9: Receita
+                // Cadastrar Receita
                 case 9 -> {
                     if (pacientes.isEmpty() || medicos.isEmpty()) {
                         System.out.println("Cadastre pelo menos um paciente e um médico primeiro!");
@@ -126,12 +152,14 @@ public class main {
                     }
                 }
 
-                // 10: sair
+                // Sair
                 case 10 -> {
                     System.out.println("Saindo do sistema...");
                     sc.close();
                     return;
                 }
+
+                // Popular dados básicos rapidamente
                 case 11 -> {
                     Paciente pppppp = new Paciente("Guilherme", "24/04/2006", "Rua Alfredo Constantino, 1234", "guivoj@gmail.com", "1234567", "123456");
                     Paciente ppppp2 = new Paciente("Ronei", "02/10/2000", "Rua Bernadete, 2004", "ronei@gmail.com", "654342", "678901");
@@ -149,6 +177,9 @@ public class main {
         }
     }
 
+    /**
+     * Exibe no console o menu de opções disponíveis para o usuário.
+     */
     public static void exibirMenu() {
         System.out.println("[01] - Cadastrar novo paciente");
         System.out.println("[02] - Cadastrar novo médico");
@@ -163,6 +194,12 @@ public class main {
         System.out.println("[11] - Instanciar o Básico");
     }
 
+    /**
+     * Coleta as informações do usuário e cria um novo paciente.
+     *
+     * @param sc scanner a ser utilizado na leitura dos campos.
+     * @return uma instância de Paciente preenchida com os dados informados.
+     */
     public static Paciente cadastrarPaciente(Scanner sc) {
 
         System.out.print("Nome: ");
@@ -196,6 +233,14 @@ public class main {
         );
     }
 
+    /**
+     * Coleta as informações do usuário e cria um novo médico.
+     * Também permite a seleção da especialidade.
+     *
+     * @param sc scanner a ser utilizado na leitura dos campos.
+     * @return uma instância de Medico preenchida com os dados informados.
+     * @throws IllegalArgumentException se a especialidade informada não existir.
+     */
     public static Medico cadastrarMedico(Scanner sc) {
         Random gerador = new Random();
 
@@ -247,6 +292,14 @@ public class main {
         return new Medico(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf, esp, crmString, salario);
     }
 
+    /**
+     * Coleta as informações do usuário e cria um novo funcionário.
+     * Também permite a seleção do cargo.
+     *
+     * @param sc scanner a ser utilizado na leitura dos campos.
+     * @return uma instância de Funcionario preenchida com os dados informados.
+     * @throws IllegalStateException se o cargo informado não for reconhecido.
+     */
     public static Funcionario cadastrarFuncionario(Scanner sc) {
 
         System.out.print("Nome: ");
@@ -288,6 +341,11 @@ public class main {
         return new Funcionario(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf, car, salario);
     }
 
+    /**
+     * Exibe no console a lista de pacientes cadastrados com um separador visual.
+     *
+     * @param pacientes lista de pacientes a exibir.
+     */
     private static void listarPacientes(ArrayList<Paciente> pacientes) {
         int i=0;
         System.out.println("Lista de pacientes:\n[1]---------------------------");
@@ -301,6 +359,11 @@ public class main {
         }
     }
 
+    /**
+     * Exibe no console a lista de médicos cadastrados com um separador visual.
+     *
+     * @param medicos lista de médicos a exibir.
+     */
     private static void listarMedicos(ArrayList<Medico> medicos) {
         int i=0;
         System.out.println("Lista de médicos:\n[1]---------------------------");
@@ -314,6 +377,11 @@ public class main {
         }
     }
 
+    /**
+     * Exibe no console a lista de funcionários cadastrados com um separador visual.
+     *
+     * @param funcionarios lista de funcionários a exibir.
+     */
     private static void listarFuncionarios(ArrayList<Funcionario> funcionarios) {
         int i=0;
         System.out.println("Lista de funcionários:\n[0]---------------------------");
@@ -326,6 +394,13 @@ public class main {
             System.out.println("[" + i + "]---------------------------");
         }
     }
+
+    /**
+     * Cria um tratamento a partir dos dados informados pelo usuário.
+     *
+     * @param sc scanner utilizado para leitura dos dados.
+     * @return uma instância de Tratamento com nome, duração e descrição.
+     */
     public static Tratamento criarTratamento(Scanner sc) {
         System.out.println("Digite o nome do tratamento:");
         String nomeTratamento = sc.nextLine();

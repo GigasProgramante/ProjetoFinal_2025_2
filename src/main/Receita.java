@@ -17,8 +17,6 @@ public class Receita {
         this.dataEmissao = dataEmissao;
         this.medico = medico;
     }
-
-    // ERA: public void exibirInfo() { ... }
     public String exibirInfo() {
         return "Receita #" + idReceita +
                 " | Data: " + dataEmissao +

@@ -20,20 +20,4 @@ public class Tratamento {
     public void associarProntuario(Prontuario prontuario){
         this.prontuarios.add(prontuario);
     }
-
-    public void removerProntuario(Prontuario prontuario){
-        this.prontuarios.remove(prontuario);
-    }
-
-    public String getNomeTratamento() {
-        return nomeTratamento;
-    }
-
-    public int getDuracao() {
-        return duracao;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
 }

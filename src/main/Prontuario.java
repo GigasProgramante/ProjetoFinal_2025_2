@@ -34,10 +34,6 @@ public class Prontuario {
         this.consultas.add(consulta);
     }
 
-    public void removerConsulta(Consulta consulta) {
-        this.consultas.remove(consulta);
-    }
-
     public ArrayList<Receita> getReceitas() {
         return receitas;
     }
