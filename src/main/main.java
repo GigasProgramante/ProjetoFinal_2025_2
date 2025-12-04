@@ -29,7 +29,7 @@ public class main {
                 case 4 -> {
                     System.out.print("Insira o nome do paciente: ");
                     String nome = sc.nextLine();
-                    
+
                     for(Paciente p:pacientes) {
                         if(p.getNome() != nome) {
                             System.out.println("Consulta marcada com sucesso!!!\nId da consulta: ");
@@ -74,7 +74,9 @@ public class main {
         System.out.println("[5] - Listar pacientes");
         System.out.println("[6] - Listar médicos");
         System.out.println("[7] - Listar funcionários");
-        System.out.println("[8] - Sair");
+        System.out.println("[8] - Cadastrar Tratamento");
+        System.out.println();
+        System.out.println("[10] - Sair");
     }
 
     public static Paciente cadastrarPaciente(Scanner sc) {
@@ -236,14 +238,26 @@ public class main {
         System.out.print("Informe o nome do médico com qual será a consulta: ");
         String nomeMedico = sc3.nextLine();
         sc3.close();
-        
+
         for(Medico m:medicos) {
             if(m.getNome() == nomeMedico) {
                 medico = m;
                 break;
             }
         }
-        
+
         consulta.setMedico(medico);
     }
+    public static Tratamento criarTratamento(Scanner sc) {
+        System.out.println("Digite o nome do tratamento:");
+        String nomeTratamento = sc.nextLine();
+        System.out.println("Digite a duração em dias:");
+        int duracao = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Digite a descrição:");
+        String descricao = sc.nextLine();
+
+        return new Tratamento(nomeTratamento, duracao, descricao);
+    }
 }
+
