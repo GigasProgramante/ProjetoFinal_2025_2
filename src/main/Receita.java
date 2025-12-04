@@ -17,5 +17,17 @@ public class Receita {
         this.dataEmissao = dataEmissao;
         this.medico = medico;
     }
+    public String exibirInfo() {
+        return "Receita #" + idReceita +
+                " | Data: " + dataEmissao +
+                " | Médico: " + medico.getNome() +
+                " | Medicamentos: " + medicamentos;
+    }
+
+    // Assim System.out.println(receita) já mostra exibirInfo()
+    @Override
+    public String toString() {
+        return exibirInfo();
+    }
 }
 

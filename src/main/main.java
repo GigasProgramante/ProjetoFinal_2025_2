@@ -34,6 +34,15 @@ public class main {
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
 
         System.out.println("Bem vindo ao sistema de gerenciamento de consultas");
+        ClinicaMedica clinica = new ClinicaMedica(
+                "Clínica Médica Santa Saúde",
+                "12.345.678/0001-90",
+                "Rua Exemplo, 123",
+                "(47) 99999-9999",
+                "contato@clinicasantasaude.com",
+                "Itaiópolis",
+                "SC"
+        );
 
         // Loop principal do menu
         while (true) {
@@ -225,6 +234,7 @@ public class main {
                         pacienteSelecionado.getProntuario().exibirProntuarioCompleto();
                     }
                 }
+                case 13 -> System.out.println(clinica.exibirInfo());
                 default -> System.out.println("Opção inválida!");
             }
 
@@ -247,6 +257,7 @@ public class main {
         System.out.println("[10] - Sair");
         System.out.println("[11] - Instanciar o Básico");
         System.out.println("[12] - Exibir Prontuario");
+        System.out.println("[13] - Exibir Detalhes da Clinica");
     }
 
     /**
