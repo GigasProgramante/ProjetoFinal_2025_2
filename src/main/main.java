@@ -107,13 +107,23 @@ public class main {
                     } else {
                         Tratamento novoTratamento = criarTratamento(sc);
 
-                        System.out.println("Selecione o paciente pelo índice (0 a " + (pacientes.size() - 1) + "):");
-                        int idxPaciente = sc.nextInt();
-                        sc.nextLine();
-                        Paciente pacienteSelecionado = pacientes.get(idxPaciente);
+                        System.out.print("Digite o nome do paciente: ");
+                        String nomePaciente = sc.nextLine();
 
-                        novoTratamento.associarProntuario(pacienteSelecionado.getProntuario());
-                        System.out.println("Tratamento associado ao prontuário com sucesso!");
+                        Paciente pacienteSelecionado = null;
+                        for (Paciente p : pacientes) {
+                            if (p.getNome().equalsIgnoreCase(nomePaciente)) {
+                                pacienteSelecionado = p;
+                                break;
+                            }
+                        }
+
+                        if (pacienteSelecionado == null) {
+                            System.out.println("Paciente não encontrado!");
+                        } else {
+                            novoTratamento.associarProntuario(pacienteSelecionado.getProntuario());
+                            System.out.println("Tratamento associado ao prontuário com sucesso!");
+                        }
                     }
                 }
 
@@ -122,17 +132,39 @@ public class main {
                     if (pacientes.isEmpty() || medicos.isEmpty()) {
                         System.out.println("Cadastre pelo menos um paciente e um médico primeiro!");
                     } else {
-                        listarPacientes(pacientes);
-                        System.out.print("Selecione o paciente pelo índice: ");
-                        int idxPaciente = sc.nextInt();
-                        sc.nextLine();
-                        Paciente paciente = pacientes.get(idxPaciente);
+                        // --- PACIENTE POR NOME ---
+                        System.out.print("Digite o nome do paciente: ");
+                        String nomePaciente = sc.nextLine();
 
-                        listarMedicos(medicos);
-                        System.out.print("Selecione o médico pelo índice: ");
-                        int idxMedico = sc.nextInt();
-                        sc.nextLine();
-                        Medico medico = medicos.get(idxMedico);
+                        Paciente paciente = null;
+                        for (Paciente p : pacientes) {
+                            if (p.getNome().equalsIgnoreCase(nomePaciente)) {
+                                paciente = p;
+                                break;
+                            }
+                        }
+
+                        if (paciente == null) {
+                            System.out.println("Paciente não encontrado!");
+                            break;
+                        }
+
+                        // --- MÉDICO POR NOME ---
+                        System.out.print("Digite o nome do médico: ");
+                        String nomeMedico = sc.nextLine();
+
+                        Medico medico = null;
+                        for (Medico m : medicos) {
+                            if (m.getNome().equalsIgnoreCase(nomeMedico)) {
+                                medico = m;
+                                break;
+                            }
+                        }
+
+                        if (medico == null) {
+                            System.out.println("Médico não encontrado!");
+                            break;
+                        }
 
                         int idReceita = gerador.nextInt(100000, 999999);
 
