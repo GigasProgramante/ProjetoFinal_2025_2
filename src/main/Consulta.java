@@ -47,15 +47,14 @@ public class Consulta {
         return sintomas;
     }
 
-    @Override
-    public String toString() {
-        return "Consulta{" +
-                "Idconsulta=" + this.Idconsulta +
-                ", medico=" + this.medico +
-                ", paciente=" + this.paciente +
-                ", dataConsulta=" + this.dataConsulta +
-                ", horaConsulta=" + this.horaConsulta +
-                ", status da consulta=" + this.statusConsulta;
+    public String exibirDetalhes() {
+        return "Consulta" +
+                " | Idconsulta= " + this.Idconsulta +
+                " | medico= " + this.medico +
+                " | paciente= " + this.paciente +
+                " | dataConsulta= " + this.dataConsulta +
+                " | horaConsulta= " + this.horaConsulta +
+                " | status da consulta= " + this.statusConsulta;
     }
 }
 

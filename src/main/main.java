@@ -49,7 +49,7 @@ public class main {
                         System.out.println(f.exibirInfo() + "------------------------------");
                     }
                 }
-                case 8 ->{
+                case 8 -> {
                     if (pacientes.isEmpty() || medicos.isEmpty()) {
                         System.out.println("Cadastre um paciente e um médico primeiro!");
                     } else {
@@ -66,11 +66,11 @@ public class main {
                         if (pacienteSeleciondado.getProntuario() == null) {
                             pacienteSeleciondado.criarProntuario(gerador.nextInt(100000), null, new ArrayList<>());
                         }
+                    }
                 }
             }
         }
     }
-
     public static void exibirMenu() {
         System.out.println("[1] - Cadastrar novo paciente");
         System.out.println("[2] - Cadastrar novo médico");

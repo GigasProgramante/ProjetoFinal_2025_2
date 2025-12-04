@@ -18,17 +18,32 @@ public class Prontuario {
     }
 
     public void adicionarReceita(Receita receita) {
-        receitas.add(receita);
+        this.receitas.add(receita);
     }
 
     public void removerReceita(Receita receita) {
-        receitas.remove(receita);
+        this.receitas.remove(receita);
+    }
+
+    public void adicionarConsulta(Consulta consulta) {
+        this.consultas.add(consulta);
+    }
+
+    public void removerConsulta(Consulta consulta) {
+        this.consultas.remove(consulta);
     }
 
     public void exibirReceitas() {
         System.out.println("Receitas no Prontuário " + numero + " do Paciente " + (paciente != null ? paciente.exibirInfo() : "Desconhecido") + ":");
         for (Receita r : receitas) {
             r.exibirDetalhes();
+        }
+    }
+
+    public void exibirConsultas() {
+        System.out.println("consultas no Prontuário " + numero + " do Paciente " + (paciente != null ? paciente.exibirInfo() : "Desconhecido") + ":");
+        for (Consulta c : consultas) {
+            c.exibirDetalhes();
         }
     }
 }
