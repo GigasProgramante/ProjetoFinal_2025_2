@@ -40,7 +40,6 @@ public class Prontuario {
     public void adicionarReceita(Receita receita) {
         receitas.add(receita);
     }
-
     public void listarReceitas() {
         if (receitas.isEmpty()) {
             System.out.println("Nenhuma receita registrada.");
