@@ -1,69 +1,73 @@
+// Consulta.java
 package main;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Consulta {
-    private final int Idconsulta;
-    private StatusConsulta statusConsulta;
-    private Medico medico;
+
     private Paciente paciente;
-    private LocalDate dataConsulta;
-    private LocalTime horaConsulta;
+    private Medico medico;
+    private LocalDate data;
+    private LocalTime hora;
     private ArrayList<String> sintomas;
+    private String nomeMedicoDigitado;
+    private StatusConsulta status;
 
-
-    public Consulta(Paciente paciente, LocalDate dataConsulta, LocalTime horaConsulta, ArrayList<String> sintomas) {
-        Random rd = new Random(100000);
-        this.Idconsulta = rd.nextInt();
-        this.statusConsulta = StatusConsulta.AGENDADA;
+    public Consulta(Paciente paciente,
+                    LocalDate data,
+                    LocalTime hora,
+                    ArrayList<String> sintomas,
+                    String nomeMedicoDigitado) {
         this.paciente = paciente;
-        this.dataConsulta = dataConsulta;
-        this.horaConsulta = horaConsulta;
+        this.data = data;
+        this.hora = hora;
         this.sintomas = sintomas;
+        this.nomeMedicoDigitado = nomeMedicoDigitado;
+        this.status = StatusConsulta.AGENDADA;
     }
-    public void remarcarConsulta(LocalDate novaData, LocalTime novaHora){
-        this.dataConsulta = novaData;
-        this.horaConsulta = novaHora;
-    }
-    public void cancelarConsulta(int idConsulta){
-        this.statusConsulta = StatusConsulta.CANCELADA;
+
+    public Paciente getPaciente() {
+        return paciente;
     }
 
     public Medico getMedico() {
-        return this.medico;
-    }
-    public Paciente getPaciente() {
-        return this.paciente;
-    }
-    public LocalDate getDataConsulta() {
-        return this.dataConsulta;
-    }
-    public LocalTime getHoraConsulta() {
-        return this.horaConsulta;
-    }
-    public ArrayList<String> getSintomas() {
-        return this.sintomas;
-    }
-
-    public int getIdconsulta() {
-        return Idconsulta;
+        return medico;
     }
 
     public void setMedico(Medico medico) {
         this.medico = medico;
     }
 
-    public String exibirDetalhes() {
-        return "Consulta" +
-                " | Idconsulta= " + this.Idconsulta +
-                " | medico= " + this.medico +
-                " | paciente= " + this.paciente +
-                " | dataConsulta= " + this.dataConsulta +
-                " | horaConsulta= " + this.horaConsulta +
-                " | status da consulta= " + this.statusConsulta;
+    public LocalDate getData() {
+        return data;
+    }
+
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public ArrayList<String> getSintomas() {
+        return sintomas;
+    }
+
+    public String getNomeMedicoDigitado() {
+        return nomeMedicoDigitado;
+    }
+
+    public StatusConsulta getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusConsulta status) {
+        this.status = status;
+    }
+
+    public String exibirInfo() {
+        return "Consulta de " + paciente.getNome() +
+                " em " + data + " às " + hora +
+                " | Médico: " + (medico != null ? medico.getNome() : nomeMedicoDigitado) +
+                " | Status: " + status;
     }
 }
-

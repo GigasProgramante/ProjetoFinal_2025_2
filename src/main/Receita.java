@@ -1,13 +1,15 @@
+// Receita.java
 package main;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Receita {
+
     private int idReceita;
     private ArrayList<String> medicamentos;
     private LocalDate dataEmissao;
-    Medico medico;
+    private Medico medico;
 
     public Receita(int idReceita, ArrayList<String> medicamentos, LocalDate dataEmissao, Medico medico) {
         this.idReceita = idReceita;
@@ -15,19 +17,12 @@ public class Receita {
         this.dataEmissao = dataEmissao;
         this.medico = medico;
     }
-    public void adicionarMedicamento(String medicamento) {
-        this.medicamentos.add(medicamento);
-    }
-    public void removerMedicamento(String medicamento) {
-        this.medicamentos.remove(medicamento);
-    }
-    public void exibirDetalhes() {
-        System.out.println("ID da Receita: " + idReceita);
-        System.out.println("Data de Emissão: " + dataEmissao);
-        System.out.println("Médico Emissor: " + (medico != null ? medico.exibirInfo() : "Não especificado"));
-        System.out.println("Medicamentos:");
-        for (String med : medicamentos) {
-            System.out.println("- " + med);
-        }
+
+    // ERA: public void exibirInfo() { ... }
+    public String exibirInfo() {
+        return "Receita #" + idReceita +
+                " | Data: " + dataEmissao +
+                " | Médico: " + medico.getNome() +
+                " | Medicamentos: " + medicamentos;
     }
 }
