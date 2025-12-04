@@ -12,10 +12,10 @@ public class Paciente extends Pessoa {
 
     public Paciente(String nome, String dataNascimento, String endereco, String email, String telefone, String cpf) {
         super(nome, dataNascimento, endereco, email, telefone, cpf);
+        criarProntuario();
     }
-
-    public void criarProntuario(int numero, Consulta consulta, ArrayList<Consulta> consultas) {
-        this.prontuario = new Prontuario(numero, consulta, consultas, this); // Liga ao Paciente
+    public void criarProntuario() {
+        this.prontuario = new Prontuario(this); // Liga ao Paciente
     }
 
     public Prontuario getProntuario() {
@@ -53,7 +53,8 @@ public class Paciente extends Pessoa {
             sintomas.add(sintoma);
         }
 
-        // Não fechar o Scanner para não fechar System.in
-        return new Consulta(this, data, hora, sintomas, nomeMedico);
+        Consulta consulta = new Consulta(this, data, hora, sintomas);
+        this.prontuario.adicionarConsulta(consulta);
+        return consulta;
     }
 }

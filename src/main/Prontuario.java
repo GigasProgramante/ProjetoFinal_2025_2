@@ -1,19 +1,19 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Prontuario {
 
     private int numero;
-    private Consulta consultaInicial;
-    private ArrayList<Consulta> consultas;
-    private Paciente paciente;
-    private ArrayList<Receita> receitas;
+    private ArrayList<Consulta> consultas = new ArrayList<>();
 
-    public Prontuario(int numero, Consulta consulta, ArrayList<Consulta> consultas, Paciente paciente) {
-        this.numero = numero;
-        this.consultaInicial = consulta;
-        this.consultas = (consultas != null) ? consultas : new ArrayList<>();
+    private Paciente paciente;
+    private ArrayList<Receita> receitas = new ArrayList<>();
+
+    public Prontuario(Paciente paciente) {
+        Random rd = new Random();
+        this.numero = rd.nextInt(100000);
         this.paciente = paciente;
         this.receitas = new ArrayList<>();
     }
@@ -22,20 +22,20 @@ public class Prontuario {
         return numero;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public void adicionarReceita(Receita receita) {
+        this.receitas.add(receita);
     }
 
-    public ArrayList<Consulta> getConsultas() {
-        return consultas;
+    public void removerReceita(Receita receita) {
+        this.receitas.remove(receita);
     }
 
     public void adicionarConsulta(Consulta consulta) {
         this.consultas.add(consulta);
     }
 
-    public void adicionarReceita(Receita receita) {
-        this.receitas.add(receita);
+    public void removerConsulta(Consulta consulta) {
+        this.consultas.remove(consulta);
     }
 
     public ArrayList<Receita> getReceitas() {

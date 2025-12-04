@@ -17,16 +17,31 @@ public class main {
 
         while (true) {
 
+            // Executa um metodo que exibe o menu
             exibirMenu();
 
+            // O scanner coleta na main a opção escolhida pelo usuário
             int opcao = sc.nextInt();
-            sc.nextLine();
+            sc.nextLine(); // Aqui o scanner garante que não tem uma linha vazia, talvez não seja necessário, mas é sempre bom garantir
 
             switch (opcao) {
                 case 1 -> pacientes.add(cadastrarPaciente(sc));
                 case 2 -> medicos.add(cadastrarMedico(sc));
                 case 3 -> funcionarios.add(cadastrarFuncionario(sc));
-                case 4 -> {}
+                case 4 -> {
+                    System.out.print("Insira o nome do paciente: ");
+                    String nome = sc.nextLine();
+
+                    for(Paciente p:pacientes) {
+                        if(p.getNome() == nome) {
+                            Consulta consulta = p.marcarConsulta();
+                            associarConsulta(consulta,medicos);
+                        } else {
+                            System.out.println("Paciente não encontrado!!!");
+                        }
+                    }
+
+                }
                 case 5 -> listarPacientes(pacientes);
                 case 6 -> listarMedicos(medicos);
                 case 7 -> listarFuncionarios(funcionarios);
@@ -42,10 +57,6 @@ public class main {
                         int idxPaciente = sc.nextInt();
                         sc.nextLine();
                         Paciente pacienteSelecionado = pacientes.get(idxPaciente);
-
-                        if (pacienteSelecionado.getProntuario() == null) {
-                            pacienteSelecionado.criarProntuario(gerador.nextInt(100000), null, new ArrayList<>());
-                        }
 
                         novoTratamento.associarProntuario(pacienteSelecionado.getProntuario());
                         System.out.println("Tratamento associado ao prontuário com sucesso!");
@@ -68,10 +79,6 @@ public class main {
                         int idxMedico = sc.nextInt();
                         sc.nextLine();
                         Medico medico = medicos.get(idxMedico);
-
-                        if (paciente.getProntuario() == null) {
-                            paciente.criarProntuario(gerador.nextInt(100000), null, new ArrayList<>());
-                        }
 
                         System.out.print("ID da receita: ");
                         int idReceita = sc.nextInt();
@@ -264,7 +271,7 @@ public class main {
     }
 
     private static void listarPacientes(ArrayList<Paciente> pacientes) {
-        int i = 0;
+        int i=0;
         System.out.println("Lista de pacientes:\n[0]---------------------------");
         for (Paciente p : pacientes) {
             System.out.println(p.exibirInfo());
@@ -277,7 +284,7 @@ public class main {
     }
 
     private static void listarMedicos(ArrayList<Medico> medicos) {
-        int i = 0;
+        int i=0;
         System.out.println("Lista de médicos:\n[0]---------------------------");
         for (Medico m : medicos) {
             System.out.println(m.exibirInfo());
@@ -290,7 +297,7 @@ public class main {
     }
 
     private static void listarFuncionarios(ArrayList<Funcionario> funcionarios) {
-        int i = 0;
+        int i=0;
         System.out.println("Lista de funcionários:\n[0]---------------------------");
         for (Funcionario f : funcionarios) {
             System.out.println(f.exibirInfo());
@@ -334,5 +341,13 @@ public class main {
         String descricao = sc.nextLine();
 
         return new Tratamento(nomeTratamento, duracao, descricao);
+    }
+
+    public static void instanciarBasico() {
+        Paciente pppppp = new Paciente("Guilherme", "24/04/2006", "Rua Alfredo Constantino, 1234", "guivoj@gmail.com", "1234567", "123456");
+        Paciente ppppp2 = new Paciente("Ronei", "02/10/2000", "Rua Bernadete, 2004", "ronei@gmail.com", "654342", "678901");
+
+        Medico mmmmmm = new Medico("Henrique", "10/08/1990", "Avenida Carlinhos, 326", "henri@gmail.com", "324563", "635256", Especialidade.CARDIOLOGISTA, "12332134123", 2200);
+        Medico mmmmm2 = new Medico("Gregory", "10/08/1980", "Avenida Carlinhos, 589", "greg@gmail.com", "354566", "424124", Especialidade.DERMATOLOGISTA, "6542345346", 4400);
     }
 }
