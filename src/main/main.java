@@ -5,13 +5,14 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class main {
+    private static Scanner sc = new Scanner(System.in);
+    private static Random gerador = new Random();
 
     public static void main(String[] args) {
         ArrayList<Paciente> pacientes = new ArrayList<>();
         ArrayList<Medico> medicos = new ArrayList<>();
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
-        Random gerador = new Random();
+
 
         System.out.println("Bem vindo ao sistema de gerenciamento de consultas");
 
@@ -30,17 +31,44 @@ public class main {
                 case 3 -> funcionarios.add(cadastrarFuncionario(sc));
                 case 4 -> {
                     System.out.print("Insira o nome do paciente: ");
-                    String nome = sc.nextLine();
+                    String nomePaciente = sc.nextLine();
 
-                    for(Paciente p:pacientes) {
-                        if(p.getNome() == nome) {
-                            Consulta consulta = p.marcarConsulta();
-                            associarConsulta(consulta,medicos);
-                        } else {
-                            System.out.println("Paciente não encontrado!!!");
+                    Paciente pacienteSelecionado = null;
+                    for (Paciente p : pacientes) {
+                        if (p.getNome().equalsIgnoreCase(nomePaciente)) {
+                            pacienteSelecionado = p;
+                            break;
                         }
                     }
 
+                    if (pacienteSelecionado == null) {
+                        System.out.println("Paciente não encontrado!!!");
+                        break;
+                    }
+
+                    if (medicos.isEmpty()) {
+                        System.out.println("Nenhum médico cadastrado!");
+                        break;
+                    }
+
+                    System.out.print("Informe o nome do médico com qual será a consulta: ");
+                    String nomeMedico = sc.nextLine();
+
+                    Medico medicoSelecionado = null;
+                    for (Medico m : medicos) {
+                        if (m.getNome().equalsIgnoreCase(nomeMedico)) {
+                            medicoSelecionado = m;
+                            break;
+                        }
+                    }
+
+                    if (medicoSelecionado == null) {
+                        System.out.println("Médico não encontrado!");
+                        break;
+                    }
+
+                    // AQUI É A CHAMADA NOVA:
+                    Consulta consulta = pacienteSelecionado.marcarConsulta(medicoSelecionado, sc);
                 }
                 case 5 -> listarPacientes(pacientes);
                 case 6 -> listarMedicos(medicos);
@@ -80,9 +108,7 @@ public class main {
                         sc.nextLine();
                         Medico medico = medicos.get(idxMedico);
 
-                        System.out.print("ID da receita: ");
-                        int idReceita = sc.nextInt();
-                        sc.nextLine();
+                        int idReceita = gerador.nextInt(100000, 999999);
 
                         ArrayList<String> meds = new ArrayList<>();
                         System.out.println("Digite os medicamentos (digite 'fim' para encerrar):");
@@ -106,6 +132,16 @@ public class main {
                     sc.close();
                     return;
                 }
+                case 11 -> {
+                    Paciente pppppp = new Paciente("Guilherme", "24/04/2006", "Rua Alfredo Constantino, 1234", "guivoj@gmail.com", "1234567", "123456");
+                    Paciente ppppp2 = new Paciente("Ronei", "02/10/2000", "Rua Bernadete, 2004", "ronei@gmail.com", "654342", "678901");
+                    pacientes.add(pppppp);
+                    pacientes.add(ppppp2);
+                    Medico mmmmmm = new Medico("Henrique", "10/08/1990", "Avenida Carlinhos, 326", "henri@gmail.com", "324563", "635256", Especialidade.CARDIOLOGISTA, "12332134123", 2200);
+                    Medico mmmmm2 = new Medico("Gregory", "10/08/1980", "Avenida Carlinhos, 589", "greg@gmail.com", "354566", "424124", Especialidade.DERMATOLOGISTA, "6542345346", 4400);
+                    medicos.add(mmmmmm);
+                    medicos.add(mmmmm2);
+                }
 
                 default -> System.out.println("Opção inválida!");
             }
@@ -114,16 +150,17 @@ public class main {
     }
 
     public static void exibirMenu() {
-        System.out.println("[1] - Cadastrar novo paciente");
-        System.out.println("[2] - Cadastrar novo médico");
-        System.out.println("[3] - Cadastrar novo funcionário");
-        System.out.println("[4] - Marcar uma consulta");
-        System.out.println("[5] - Listar pacientes");
-        System.out.println("[6] - Listar médicos");
-        System.out.println("[7] - Listar funcionários");
-        System.out.println("[8] - Cadastrar Tratamento");
-        System.out.println("[9] - Cadastrar Receita");
+        System.out.println("[01] - Cadastrar novo paciente");
+        System.out.println("[02] - Cadastrar novo médico");
+        System.out.println("[03] - Cadastrar novo funcionário");
+        System.out.println("[04] - Marcar uma consulta");
+        System.out.println("[05] - Listar pacientes");
+        System.out.println("[06] - Listar médicos");
+        System.out.println("[07] - Listar funcionários");
+        System.out.println("[08] - Cadastrar Tratamento");
+        System.out.println("[09] - Cadastrar Receita");
         System.out.println("[10] - Sair");
+        System.out.println("[11] - Instanciar o Básico");
     }
 
     public static Paciente cadastrarPaciente(Scanner sc) {
@@ -207,17 +244,7 @@ public class main {
 
         System.out.println("Médico cadastrado com sucesso!");
 
-        return new Medico(
-                nome,
-                partes[0] + "/" + partes[1] + "/" + partes[2],
-                endereco,
-                email,
-                telefone,
-                cpf,
-                esp,
-                crmString,
-                salario
-        );
+        return new Medico(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf, esp, crmString, salario);
     }
 
     public static Funcionario cadastrarFuncionario(Scanner sc) {
@@ -258,41 +285,32 @@ public class main {
 
         System.out.println("Funcionário cadastrado com sucesso!");
 
-        return new Funcionario(
-                nome,
-                partes[0] + "/" + partes[1] + "/" + partes[2],
-                endereco,
-                email,
-                telefone,
-                cpf,
-                car,
-                salario
-        );
+        return new Funcionario(nome, partes[0] + "/" + partes[1] + "/" + partes[2], endereco, email, telefone, cpf, car, salario);
     }
 
     private static void listarPacientes(ArrayList<Paciente> pacientes) {
         int i=0;
-        System.out.println("Lista de pacientes:\n[0]---------------------------");
+        System.out.println("Lista de pacientes:\n[1]---------------------------");
         for (Paciente p : pacientes) {
             System.out.println(p.exibirInfo());
             i++;
             if (i == pacientes.size()) {
                 break;
             }
-            System.out.println("[" + i + "]---------------------------");
+            System.out.println("[" + (i + 1) + "]---------------------------");
         }
     }
 
     private static void listarMedicos(ArrayList<Medico> medicos) {
         int i=0;
-        System.out.println("Lista de médicos:\n[0]---------------------------");
+        System.out.println("Lista de médicos:\n[1]---------------------------");
         for (Medico m : medicos) {
             System.out.println(m.exibirInfo());
             i++;
             if (i == medicos.size()) {
                 break;
             }
-            System.out.println("[" + i + "]---------------------------");
+            System.out.println("[" + (i + 1) + "]---------------------------");
         }
     }
 
@@ -308,29 +326,6 @@ public class main {
             System.out.println("[" + i + "]---------------------------");
         }
     }
-
-    public static void associarConsulta(Consulta consulta, ArrayList<Medico> medicos) {
-        if (medicos.isEmpty()) {
-            System.out.println("Nenhum médico cadastrado!");
-            return;
-        }
-
-        Scanner sc3 = new Scanner(System.in);
-        System.out.print("Informe o nome do médico com qual será a consulta: ");
-        String nomeMedico = sc3.nextLine();
-
-        Medico medico = medicos.get(0);
-        for (Medico m : medicos) {
-            if (m.getNome().equals(nomeMedico)) {
-                medico = m;
-                break;
-            }
-        }
-
-        consulta.setMedico(medico);
-        // Não fechar sc3 para não fechar System.in
-    }
-
     public static Tratamento criarTratamento(Scanner sc) {
         System.out.println("Digite o nome do tratamento:");
         String nomeTratamento = sc.nextLine();
@@ -341,13 +336,5 @@ public class main {
         String descricao = sc.nextLine();
 
         return new Tratamento(nomeTratamento, duracao, descricao);
-    }
-
-    public static void instanciarBasico() {
-        Paciente pppppp = new Paciente("Guilherme", "24/04/2006", "Rua Alfredo Constantino, 1234", "guivoj@gmail.com", "1234567", "123456");
-        Paciente ppppp2 = new Paciente("Ronei", "02/10/2000", "Rua Bernadete, 2004", "ronei@gmail.com", "654342", "678901");
-
-        Medico mmmmmm = new Medico("Henrique", "10/08/1990", "Avenida Carlinhos, 326", "henri@gmail.com", "324563", "635256", Especialidade.CARDIOLOGISTA, "12332134123", 2200);
-        Medico mmmmm2 = new Medico("Gregory", "10/08/1980", "Avenida Carlinhos, 589", "greg@gmail.com", "354566", "424124", Especialidade.DERMATOLOGISTA, "6542345346", 4400);
     }
 }
