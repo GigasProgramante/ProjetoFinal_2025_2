@@ -11,10 +11,6 @@ public class Consulta {
     private int Idconsulta;
     private Paciente paciente;
     private Medico medico;
-    private LocalDate dataConsulta;
-    private LocalTime horaConsulta;
-    private ArrayList<String> sintomas;
-    private String nomeMedicoDigitado;
     private StatusConsulta statusConsulta;
 
     public Consulta(Paciente paciente, LocalDate dataConsulta, LocalTime horaConsulta, ArrayList<String> sintomas) {
