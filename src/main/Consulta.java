@@ -21,4 +21,8 @@ public class Consulta {
     public void setMedico(Medico medico) {
         this.medico = medico;
     }
+
+    public int getIdconsulta() {
+        return Idconsulta;
+    }
 }

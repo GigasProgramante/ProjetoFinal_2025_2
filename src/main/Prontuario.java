@@ -34,7 +34,7 @@ public class Prontuario {
         System.out.println("Consultas do paciente " + paciente.getNome() + ":");
         for (Consulta c : consultas) {
             System.out.println("----------------------------");
-            System.out.println(c);
+            System.out.println(c.getIdconsulta());
         }
     }
     public void adicionarReceita(Receita receita) {
