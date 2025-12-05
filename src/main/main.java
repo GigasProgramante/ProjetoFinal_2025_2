@@ -194,11 +194,7 @@ public class main {
                 }
 
                 // Sair
-                case 10 -> {
-                    System.out.println("Saindo do sistema...");
-                    sc.close();
-                    return;
-                }
+
 
                 // Popular dados básicos rapidamente
                 case 11 -> {
@@ -211,6 +207,7 @@ public class main {
                     medicos.add(mmmmmm);
                     medicos.add(mmmmm2);
                 }
+                case 10 -> System.out.println(clinica.exibirInfo());
                 case 12 -> {
                     if (pacientes.isEmpty()) {
                         System.out.println("Cadastre um paciente primeiro!");
@@ -234,7 +231,12 @@ public class main {
                         pacienteSelecionado.getProntuario().exibirProntuarioCompleto();
                     }
                 }
-                case 13 -> System.out.println(clinica.exibirInfo());
+
+                case 13 -> {
+                    System.out.println("Saindo do sistema...");
+                    sc.close();
+                    return;
+                }
                 default -> System.out.println("Opção inválida!");
             }
 
@@ -254,10 +256,10 @@ public class main {
         System.out.println("[07] - Listar funcionários");
         System.out.println("[08] - Cadastrar Tratamento");
         System.out.println("[09] - Cadastrar Receita");
-        System.out.println("[10] - Sair");
+        System.out.println("[10] - Exibir Detalhes da Clinica");
         System.out.println("[11] - Instanciar o Básico");
         System.out.println("[12] - Exibir Prontuario");
-        System.out.println("[13] - Exibir Detalhes da Clinica");
+        System.out.println("[13] - Sair");
     }
 
     /**
