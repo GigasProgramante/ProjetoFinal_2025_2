@@ -34,7 +34,8 @@ public class Prontuario {
         System.out.println("Consultas do paciente " + paciente.getNome() + ":");
         for (Consulta c : consultas) {
             System.out.println("----------------------------");
-            System.out.println(c.getIdconsulta());
+            System.out.println(c.getIdconsulta() + " ------- Médico: " + c.getMedico().getNome());
+            System.out.println("Data/hora: " + c.getData() + " | " + c.getHora());
             c.listarSintomas();
         }
     }
