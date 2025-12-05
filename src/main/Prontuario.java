@@ -35,6 +35,7 @@ public class Prontuario {
         for (Consulta c : consultas) {
             System.out.println("----------------------------");
             System.out.println(c.getIdconsulta());
+            c.listarSintomas();
         }
     }
     public void adicionarReceita(Receita receita) {
