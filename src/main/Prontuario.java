@@ -50,7 +50,7 @@ public class Prontuario {
         System.out.println("Receitas do paciente " + paciente.getNome() + ":");
         for (Receita r : receitas) {
             System.out.println("----------------------------");
-            System.out.println(r); // ou r.exibirInfo()
+            System.out.println(r.exibirInfo()); // ou r.exibirInfo()
         }
     }
 
